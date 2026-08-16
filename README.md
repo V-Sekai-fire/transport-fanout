@@ -22,8 +22,8 @@ It reads entity state from `interactor-authority` every tick. A ring forces co-l
 
 ## State
 
-**Buildable, not deployed.** `src/fanout.cpp` is the interest filter and the packing, carried over from `interactor-gyre` unchanged. Both generated headers it needs exist — `predictive_bvh.h` in `lean-spatial-oracle` and `xr_grid_entity_packet.h` emitted by `lean-entity-packet`'s `packet_emit` — so pointing `WEFT_GEN_DIR` at a directory holding both compiles this. It had never compiled before, because the packet codec was a file everything included and nobody had emitted.
+**Buildable, not deployed.** `src/fanout.cpp` is the interest filter and the packing, carried over from `interactor-gyre` unchanged. Both generated headers it needs exist — `predictive_bvh.h` in `interactor-spatial-oracle` and `xr_grid_entity_packet.h` emitted by `contract-entity-packet`'s `packet_emit` — so pointing `WEFT_GEN_DIR` at a directory holding both compiles this. It had never compiled before, because the packet codec was a file everything included and nobody had emitted.
 
 A caller must still supply `aabb_overlaps`: `predictive_bvh.h:258` declares it `extern` and leaves the definition to the adapter, so a caller with no Godot in it writes the six comparisons itself.
 
-It is not a process yet — no loop, no transport, only the logic a loop would call, and it needs the ring subscription that feeds it a tick. A caller with neither still reaches the real filtering, since `fanout_sink_t` takes a counter as happily as a socket, which is how `service-physics`'s one-core benchmark times this without a network.
+It is not a process yet — no loop, no transport, only the logic a loop would call, and it needs the ring subscription that feeds it a tick. A caller with neither still reaches the real filtering, since `fanout_sink_t` takes a counter as happily as a socket, which is how `interactor-ward`'s one-core benchmark times this without a network.
