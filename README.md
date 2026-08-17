@@ -2,7 +2,7 @@
 
 One tick of a zone, filtered by interest and sent to the subscribers who should see it.
 
-A transport layer is the input that triggers an interactor, and this is the egress one. `transport-gateway` and `transport-ingest` terminate client transport on the way *in*; this is the way out, and a different job: driven by the zone tick rather than by an arriving packet, and doing work per subscriber rather than per connection.
+A transport layer is the input that triggers an interactor, and this is the egress one. `transport-gateway-c` and `transport-ingest-c` terminate client transport on the way *in*; this is the way out, and a different job: driven by the zone tick rather than by an arriving packet, and doing work per subscriber rather than per connection.
 
 ## Two rules it exists to keep
 
