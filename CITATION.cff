@@ -1,0 +1,63 @@
+cff-version: 1.2.0
+message: "If you use this software, please cite it as below."
+title: "transport-fanout: the interest-filtered egress edge"
+abstract: >
+  One tick of a zone, filtered by interest and sent to the subscribers who should see
+  it. The gateway and ingest transports terminate client transport on the way in;
+  this is the way out, and a different job -- driven by the zone tick rather than by
+  an arriving packet, and doing work per subscriber rather than per connection. The
+  nasty path is millions of packets a second, so the entity packet is never CBOR: it
+  is the fixed 100-byte XRGridEntityPacket, memcpy and offset reads, version pinned
+  per connection.
+authors:
+  - family-names: Lee
+    given-names: "K. S. Ernest (iFire)"
+    email: ernest.lee@chibifire.com
+    orcid: "https://orcid.org/0000-0003-4570-1436"
+version: 0.1.0-dev.1
+date-released: "2026-08-17"
+license: MIT
+repository-code: "https://github.com/v-sekai-multiplayer-fabric/transport-fanout"
+keywords:
+  - interest-management
+  - multiplayer
+  - zero-copy
+  - iceoryx2
+references:
+
+  - type: software
+    title: "contract-entity-packet: the 100-byte integral fabric entity packet"
+    authors:
+      - family-names: Lee
+        given-names: "K. S. Ernest (iFire)"
+    url: "https://github.com/v-sekai-multiplayer-fabric/contract-entity-packet"
+    notes: >
+      The wire format this packs into. `xr_grid_entity_packet.h` is emitted by that
+      repository's packet_emit, not written here. Until it was emitted, this repository
+      had never compiled: the codec was a file everything included and nobody produced.
+
+  - type: software
+    title: "interactor-spatial-oracle: predictive spatial oracle with ghost expansion and SAH proofs"
+    authors:
+      - family-names: Lee
+        given-names: "K. S. Ernest (iFire)"
+    url: "https://github.com/v-sekai-multiplayer-fabric/interactor-spatial-oracle"
+    notes: >
+      Emits `predictive_bvh.h`, the other generated header this needs. Both come from
+      elsewhere, which is why WEFT_GEN_DIR points at a directory rather than at a path
+      inside this tree.
+
+  - type: software
+    title: "contract-interest-mgmt: the authority-interest and solve-order hexagon"
+    authors:
+      - family-names: Lee
+        given-names: "K. S. Ernest (iFire)"
+    url: "https://github.com/v-sekai-multiplayer-fabric/contract-interest-mgmt"
+    notes: "Who-sees-whom, which is the filter `src/fanout.cpp` applies per subscriber."
+
+  - type: software
+    title: "iceoryx2: zero-copy lock-free inter-process communication"
+    authors:
+      - name: "ekxide IO GmbH"
+    url: "https://github.com/eclipse-iceoryx/iceoryx2"
+    notes: "The bus a zone tick arrives on, reached through the contract-bus harness ABI."
