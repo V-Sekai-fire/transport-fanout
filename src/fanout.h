@@ -10,7 +10,7 @@
  * The delivery seam stays a function pointer, so a caller with no transport at all -- a test, a
  * benchmark -- passes a counter and gets the real filtering.
  *
- * SPDX-License-Identifier: Apache-2.0
+ * SPDX-License-Identifier: MIT
  */
 #ifndef FABRIC_FANOUT_H
 #define FABRIC_FANOUT_H
