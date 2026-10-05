@@ -10,8 +10,10 @@ It is a library rather than a process: a caller supplies the tick and the sink.
 
 ## Build and run
 
-The build needs two generated headers: the predictive BVH from `interactor-spatial-oracle` and the entity packet codec from `contract-entity-packet`. Point the `WEFT_GEN_DIR` build setting at the directory holding them; without it, the build skips the library.
+The build needs two generated headers: the predictive BVH from `interactor-spatial-oracle` and the entity packet codec from `contract-entity-packet`. Point the `WEFT_GEN_DIR` build setting at a directory that holds `predictive_bvh.h` at its top and the packet header at `gen/xr_grid_entity_packet.h`; without it, the build skips the library.
+
+`predictive_bvh.h` declares `aabb_overlaps` as extern, so a caller defines it before the library links into anything.
 
 ## Licence
 
-MIT, as LICENSE and CITATION.cff state. The public header's SPDX tag says Apache-2.0, which disagrees with them.
+MIT; see LICENSE.
